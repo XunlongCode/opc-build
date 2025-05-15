@@ -90,6 +90,10 @@ jobs:
           ref: ${{ env.GITHUB_BRANCH }}
         if: env.SHOULD_BUILD == 'yes'
 
+      - name: Uncompress source
+        run: |
+          python ./uncompress_source.py
+
       - name: Setup GCC
         uses: egor-tensin/setup-gcc@v1
         with:

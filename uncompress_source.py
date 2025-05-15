@@ -47,12 +47,17 @@ def move_files():
 
 
 def set_env():
+    env_file = os.getenv("GITHUB_ENV")
+    print(f"github env file: {env_file}")
+    if not env_file:
+        return
+
     quality_json_path = f"./upstream/{QUALITY}.json"
     quality_json = json.loads(open(quality_json_path, "r").read())
     print(quality_json)
-    with open(os.environ["GITHUB_ENV"], "a") as env_file:
-        env_file.write(f"MS_TAG={quality_json['tag']}\n")
-        env_file.write(f"MS_COMMIT={quality_json['commit']}\n")
+    with open(env_file, "a") as e:
+        e.write(f"MS_TAG={quality_json['tag']}\n")
+        e.write(f"MS_COMMIT={quality_json['commit']}\n")
 
 
 def main():

@@ -32,7 +32,9 @@ def uncompress_source(source_path=SOURCE_FILE, output_path=TEMP_PATH):
 
     # Uncompress the source file
     try:
-        tarfile.open(source_path, "r:gz").extractall(output_path,  filter='fully_trusted')
+        tarfile.open(source_path, "r:gz").extractall(
+            output_path, filter="fully_trusted"
+        )
         print(f"Source file '{source_path}' uncompressed successfully.")
     except Exception as e:
         print(f"Error uncompressing source file '{source_path}': {e}")
@@ -43,8 +45,16 @@ def move_files():
     shutil.move(f"{TEMP_PATH}/package", VSCODE_PATH)
 
 
+def set_env():
+    quality_json_path = f"./upstream/{QUALITY}.json"
+    quality_json = open(quality_json_path, "r").read()
+    os.environ["MS_TAG"] = quality_json["tag"]
+    os.environ["MS_COMMIT"] = quality_json["commit"]
+
+
 def main():
     clean_up()
+
     uncompress_source()
     move_files()
 

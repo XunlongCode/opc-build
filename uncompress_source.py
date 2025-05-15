@@ -5,7 +5,19 @@ import shutil
 
 SOURCE_FILE = "./source/code-oss-dev.tgz"
 TEMP_PATH = "./temp"
-QUALITY = f"{os.getenv('VSCODE_QUALITY')}"
+QUALITY = f"{os.getenv('VSCODE_QUALITY', 'stable')}"
+VSCODE_PATH = "./vscode"
+
+
+def clean_up():
+    if os.path.exists(TEMP_PATH):
+        shutil.rmtree(TEMP_PATH)
+
+    if os.path.exists(VSCODE_PATH):
+        shutil.rmtree(VSCODE_PATH)
+
+    if os.path.exists(f"./upstream/{QUALITY}.json"):
+        os.remove(f"./upstream/{QUALITY}.json")
 
 
 def uncompress_source(source_path=SOURCE_FILE, output_path=TEMP_PATH):
@@ -20,7 +32,7 @@ def uncompress_source(source_path=SOURCE_FILE, output_path=TEMP_PATH):
 
     # Uncompress the source file
     try:
-        tarfile.open(source_path, "r:gz").extractall(output_path)
+        tarfile.open(source_path, "r:gz").extractall(output_path,  filter='fully_trusted')
         print(f"Source file '{source_path}' uncompressed successfully.")
     except Exception as e:
         print(f"Error uncompressing source file '{source_path}': {e}")
@@ -28,10 +40,11 @@ def uncompress_source(source_path=SOURCE_FILE, output_path=TEMP_PATH):
 
 def move_files():
     shutil.move(f"{TEMP_PATH}/package/{QUALITY}.json", "./upstream")
-    shutil.move(f"{TEMP_PATH}/package", "./vscode")
+    shutil.move(f"{TEMP_PATH}/package", VSCODE_PATH)
 
 
 def main():
+    clean_up()
     uncompress_source()
     move_files()
 

@@ -50,6 +50,9 @@ jobs:
       - name: Uncompress source
         run: |
           python ./uncompress_source.py
+
+      - name: Setup Env
+        run: |
           date=$( date +%Y%j )
           RELEASE_VERSION="${MS_TAG}.${date: -5}"
           SHOULD_BUILD=yes

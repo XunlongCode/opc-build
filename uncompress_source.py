@@ -5,7 +5,7 @@ import shutil
 import json
 
 SOURCE_FILE = "./source/code-oss-dev.tgz"
-TEMP_PATH = "./temp/package"
+TEMP_PATH = "./temp"
 QUALITY = f"{os.getenv('VSCODE_QUALITY', 'stable')}"
 VSCODE_PATH = "./vscode"
 
@@ -22,6 +22,7 @@ def clean_up():
 
 
 def uncompress_source(source_path=SOURCE_FILE, output_path=TEMP_PATH):
+    output_path = os.path.join(output_path, "package")
     # Check if the source file exists
     if not os.path.exists(source_path):
         print(f"Source file '{source_path}' does not exist.")

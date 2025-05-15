@@ -122,7 +122,8 @@ jobs:
 
       - name: Install dependencies & Build extensions
         run: |
-          python ./start_build.py i
+          cd vscode
+          python ../start_build.py i
 
       - name: Build
         env:

@@ -197,6 +197,13 @@ jobs:
           python-version: "3.11"
         if: env.SHOULD_BUILD == 'yes'
 
+      - name: Check existing tags/releases
+        env:
+          DISABLE_MSI: ${{ vars.DISABLE_STABLE_MSI }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: ./check_tags.sh
+        if: env.SHOULD_BUILD == 'yes'
+
       - name: Download vscode artifact
         uses: actions/download-artifact@v4
         with:
@@ -224,7 +231,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: ./release.sh
         if: env.SHOULD_BUILD == 'yes' && env.SHOULD_DEPLOY == 'yes'
-      
+
       - name: Update versions repo
         env:
           FORCE_UPDATE: ${{ github.event.inputs.force_version }}

@@ -4,7 +4,8 @@ import tarfile
 import shutil
 import json
 
-SOURCE_FILE = "./source/code-oss-dev.tgz"
+SOURCE_PATH = "./source"
+SOURCE_FILE = f"{SOURCE_PATH}/code-oss-dev.tgz"
 TEMP_PATH = "./temp"
 QUALITY = f"{os.getenv('VSCODE_QUALITY', 'stable')}"
 VSCODE_PATH = "./vscode"
@@ -43,7 +44,7 @@ def uncompress_source(source_path=SOURCE_FILE, output_path=TEMP_PATH):
 
 
 def move_files():
-    shutil.move(f"{TEMP_PATH}/package/{QUALITY}.json", "./upstream")
+    shutil.copy(f"{SOURCE_PATH}/{QUALITY}.json", "./upstream")
     shutil.move(f"{TEMP_PATH}/package", VSCODE_PATH)
 
 

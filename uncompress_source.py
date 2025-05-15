@@ -5,7 +5,7 @@ import shutil
 import json
 
 SOURCE_FILE = "./source/code-oss-dev.tgz"
-TEMP_PATH = "./temp"
+TEMP_PATH = "./temp/package"
 QUALITY = f"{os.getenv('VSCODE_QUALITY', 'stable')}"
 VSCODE_PATH = "./vscode"
 

@@ -1,0 +1,41 @@
+name: stable-windows
+
+on:
+  workflow_dispatch:
+    inputs:
+      force_version:
+        type: boolean
+        description: Force update version
+      generate_assets:
+        type: boolean
+        description: Generate assets
+      checkout_pr:
+        type: string
+        description: Checkout PR
+  repository_dispatch:
+    types: [stable]
+  push:
+    branches: [master]
+    paths-ignore:
+      - "**/*.md"
+  pull_request:
+    branches: [master]
+    paths-ignore:
+      - "**/*.md"
+
+env:
+  APP_NAME: OrangePi Code
+  ASSETS_REPOSITORY: ${{ github.repository }}
+  BINARY_NAME: orangepicode
+  GH_REPO_PATH: ${{ github.repository_owner }}/${{ github.repository }}
+  ORG_NAME: ${{ github.repository_owner }}
+  OS_NAME: windows
+  VERSIONS_REPOSITORY: ${{ github.repository_owner }}/versions
+  VSCODE_QUALITY: stable
+
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Uncompress source
+        run: python ./uncompress_source.py

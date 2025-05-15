@@ -1,0 +1,18 @@
+vscode*
+VS*/*
+VSCode*
+OrangePi Code*
+.DS_Store
+*.env
+assets/
+build/linux/appimage/out
+build/linux/appimage/pkg2appimage.AppDir
+build/linux/appimage/pkg2appimage-*.AppImage
+build/linux/appimage/pkg2appimage.AppImage
+build/linux/appimage/squashfs-root
+build/linux/appimage/OrangePi Code
+build/windows/msi/releasedir
+build/windows/msi/Files*.wxs
+build/windows/msi/Files*.wixobj
+stores/snapcraft/insider/*.snap
+stores/snapcraft/stable/*.snap

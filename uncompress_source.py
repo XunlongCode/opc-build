@@ -47,9 +47,6 @@ def move_files():
 
 
 def set_env():
-    if not os.getenv("GITHUB_ENV"):
-        return
-
     quality_json_path = f"./upstream/{QUALITY}.json"
     quality_json = json.loads(open(quality_json_path, "r").read())
     print(quality_json)

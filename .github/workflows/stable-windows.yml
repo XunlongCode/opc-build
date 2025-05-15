@@ -34,6 +34,9 @@ env:
   VSCODE_QUALITY: stable
   GITHUB_BRANCH: master
 
+permissions:
+  contents: write
+
 jobs:
   check:
     runs-on: ubuntu-latest

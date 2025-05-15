@@ -43,6 +43,7 @@ jobs:
       SHOULD_BUILD: ${{ env.SHOULD_BUILD }}
       SHOULD_DEPLOY: ${{ env.SHOULD_DEPLOY }}
     steps:
+      - uses: actions/checkout@v4
       - name: Uncompress source
         run: |
           python ./uncompress_source.py

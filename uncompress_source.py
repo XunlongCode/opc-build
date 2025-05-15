@@ -59,6 +59,8 @@ def main():
     uncompress_source()
     move_files()
 
+    set_env()
+
 
 if __name__ == "__main__":
     main()

@@ -49,8 +49,8 @@ def set_env():
     quality_json_path = f"./upstream/{QUALITY}.json"
     quality_json = open(quality_json_path, "r").read()
     print(quality_json)
-    os.environ["MS_TAG"] = quality_json["tag"]
-    os.environ["MS_COMMIT"] = quality_json["commit"]
+    os.environ["MS_TAG"] = str(quality_json["tag"])
+    os.environ["MS_COMMIT"] = str(quality_json["commit"])
 
 
 def main():

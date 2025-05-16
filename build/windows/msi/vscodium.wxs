@@ -24,7 +24,7 @@
 
     <Upgrade Id="$(var.ProductUpgradeCode)">
       <UpgradeVersion OnlyDetect="yes" Minimum="$(var.ProductVersion)" Property="NEWPRODUCTFOUND" IncludeMinimum="no" />
-      <UpgradeVersion Minimum="$(var.RTMProductVersion)" IncludeMinimum="yes" Maximum="$(var.ProductVersion)" Property="UPGRADEFOUND" IncludeMaximum="no" MigrateFeatures="yes" />
+      <UpgradeVersion Minimum="$(var.RTMProductVersion)" IncludeMinimum="yes" Maximum="$(var.ProductVersion)" Property="UPGRADEFOUND" IncludeMaximum="yes" MigrateFeatures="yes" />
     </Upgrade>
     <CustomAction Id="PreventDowngrading" Error="!(loc.NewerVersionInstalled)" />
 

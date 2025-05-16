@@ -20,5 +20,5 @@
 
   <!-- Static settings, DO NOT TOUCH or upgrades will break! -->
   <?define ProductUpgradeCode="{@@PRODUCT_UPGRADE_CODE@@}" ?>
-  <?define RTMProductVersion="0.0.1" ?>
+  <?define RTMProductVersion="0.0.001" ?>
 </Include>

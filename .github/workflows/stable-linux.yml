@@ -146,10 +146,16 @@ jobs:
           ./build.sh
         if: env.SHOULD_BUILD == 'yes'
 
+      - name: Init a git repository
+        run: |
+          cd vscode
+          git init
+
       - name: Compress vscode artifact
         run: |
           find vscode -type f -not -path "*/node_modules/*" -not -path "vscode/.build/node/*" -not -path "vscode/.git/*" > vscode.txt
           echo "vscode/.build/extensions/node_modules" >> vscode.txt
+          echo "vscode/.git" >> vscode.txt
           tar -czf vscode.tar.gz -T vscode.txt
         if: env.SHOULD_BUILD == 'yes'
 

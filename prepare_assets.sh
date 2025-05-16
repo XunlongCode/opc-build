@@ -74,6 +74,7 @@ if [[ "${OS_NAME}" == "osx" ]]; then
   if [[ "${SHOULD_BUILD_DMG}" != "no" ]]; then
     echo "Building and moving DMG"
     pushd "VSCode-darwin-${VSCODE_ARCH}"
+    CSC_IDENTITY_AUTO_DISCOVERY=false
     npx create-dmg ./*.app . --identity="" --overwrite --no-sign
     mv ./*.dmg "../assets/${APP_NAME}.${VSCODE_ARCH}.${RELEASE_VERSION}.dmg"
     popd

@@ -59,7 +59,7 @@ generateJson() {
   JSON_DATA="{}"
 
   # generate parts
-  url="${URL_BASE}/${ASSET_NAME}"
+  url="${URL_BASE}/${ASSET_NAME// /\.}"
   name="${RELEASE_VERSION}"
   version="${BUILD_SOURCEVERSION}"
   productVersion="${RELEASE_VERSION}"

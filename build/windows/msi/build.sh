@@ -16,13 +16,13 @@ if [[ "${VSCODE_QUALITY}" == "insider" ]]; then
   PRODUCT_NAME="OrangePi Code - Insiders"
   PRODUCT_CODE="OrangePiCodeInsiders"
   PRODUCT_UPGRADE_CODE="BE0FDF62-B67B-4B89-BA23-A882D6E521FE"
-  ICON_DIR="..\\..\\..\\src\\insider\\resources\\win32"
+  ICON_DIR="..\\..\\..\\vscode\\resources\\win32"
   SETUP_RESOURCES_DIR=".\\resources\\insider"
 else
   PRODUCT_NAME="OrangePi Code"
   PRODUCT_CODE="OrangePiCode"
   PRODUCT_UPGRADE_CODE="5B0044CC-FE9B-47ED-A9C6-63688B6AE913"
-  ICON_DIR="..\\..\\..\\src\\stable\\resources\\win32"
+  ICON_DIR="..\\..\\..\\vscode\\resources\\win32"
   SETUP_RESOURCES_DIR=".\\resources\\stable"
 fi
 
@@ -79,7 +79,7 @@ BuildSetupTranslationTransform() {
 }
 
 "${WIX}bin\\heat.exe" dir "${BINARY_DIR}" -out "Files-${OUTPUT_BASE_FILENAME}.wxs" -t vscodium.xsl -gg -sfrag -scom -sreg -srd -ke -cg "AppFiles" -var var.ManufacturerName -var var.AppName -var var.AppCodeName -var var.ProductVersion -var var.IconDir -var var.LicenseDir -var var.BinaryDir -dr APPLICATIONFOLDER -platform "${PLATFORM}"
-"${WIX}bin\\candle.exe" -arch "${PLATFORM}" vscodium.wxs "Files-${OUTPUT_BASE_FILENAME}.wxs" -ext WixUIExtension -ext WixUtilExtension -ext WixNetFxExtension -dManufacturerName="VSCodium" -dAppCodeName="${PRODUCT_CODE}" -dAppName="${PRODUCT_NAME}" -dProductVersion="${RELEASE_VERSION%-insider}" -dProductId="${PRODUCT_ID}" -dBinaryDir="${BINARY_DIR}" -dIconDir="${ICON_DIR}" -dLicenseDir="${LICENSE_DIR}" -dSetupResourcesDir="${SETUP_RESOURCES_DIR}" -dCulture="${CULTURE}"
+"${WIX}bin\\candle.exe" -arch "${PLATFORM}" vscodium.wxs "Files-${OUTPUT_BASE_FILENAME}.wxs" -ext WixUIExtension -ext WixUtilExtension -ext WixNetFxExtension -dManufacturerName="Xunlong" -dAppCodeName="${PRODUCT_CODE}" -dAppName="${PRODUCT_NAME}" -dProductVersion="${RELEASE_VERSION%-insider}" -dProductId="${PRODUCT_ID}" -dBinaryDir="${BINARY_DIR}" -dIconDir="${ICON_DIR}" -dLicenseDir="${LICENSE_DIR}" -dSetupResourcesDir="${SETUP_RESOURCES_DIR}" -dCulture="${CULTURE}"
 "${WIX}bin\\light.exe" vscodium.wixobj "Files-${OUTPUT_BASE_FILENAME}.wixobj" -ext WixUIExtension -ext WixUtilExtension -ext WixNetFxExtension -spdb -cc "${TEMP}\\vscodium-cab-cache\\${PLATFORM}" -out "${SETUP_RELEASE_DIR}\\${OUTPUT_BASE_FILENAME}.msi" -loc "i18n\\vscodium.${CULTURE}.wxl" -cultures:"${CULTURE}" -sice:ICE60 -sice:ICE69
 
 BuildSetupTranslationTransform de-de 1031

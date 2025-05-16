@@ -113,13 +113,17 @@ jobs:
           CERTIFICATE_OSX_P12_DATA: ${{ secrets.CERTIFICATE_OSX_NEW_P12_DATA }}
           CERTIFICATE_OSX_P12_PASSWORD: ${{ secrets.CERTIFICATE_OSX_NEW_P12_PASSWORD }}
           CERTIFICATE_OSX_TEAM_ID: ${{ secrets.CERTIFICATE_OSX_NEW_TEAM_ID }}
-        run: ./prepare_assets.sh
+        run: |
+          chmod +x ./prepare_assets.sh
+          ./prepare_assets.sh
         if: env.SHOULD_BUILD == 'yes' && (env.SHOULD_DEPLOY == 'yes' || github.event.inputs.generate_assets == 'true')
 
       - name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: ./release.sh
+        run: |
+          chmod +x ./release.sh
+          ./release.sh
         if: env.SHOULD_BUILD == 'yes' && env.SHOULD_DEPLOY == 'yes'
 
       - name: Update versions repo
@@ -127,7 +131,9 @@ jobs:
           FORCE_UPDATE: ${{ github.event.inputs.force_version }}
           GITHUB_TOKEN: ${{ secrets.STRONGER_GITHUB_TOKEN }}
           GITHUB_USERNAME: ${{ github.repository_owner }}
-        run: ./update_version.sh
+        run: |
+          chmod +x ./update_version.sh
+          ./update_version.sh
         if: env.SHOULD_DEPLOY == 'yes'
 
       - name: Upload assets

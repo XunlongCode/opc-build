@@ -141,7 +141,9 @@ jobs:
         env:
           SHOULD_BUILD_REH: "no"
           SHOULD_BUILD_REH_WEB: "no"
-        run: ./build.sh
+        run: |
+          chmod +x ./build.sh
+          ./build.sh
         if: env.SHOULD_BUILD == 'yes'
 
       - name: Compress vscode artifact
@@ -221,7 +223,9 @@ jobs:
         if: env.DISABLED != 'yes'
 
       - name: Install GH
-        run: ./install_gh.sh
+        run: |
+          chmod +x ./install_gh.sh
+          ./install_gh.sh
         if: env.DISABLED != 'yes' && env.SHOULD_BUILD == 'yes' && env.SHOULD_DEPLOY == 'yes'
 
       - name: Check existing VSCodium tags/releases
@@ -229,7 +233,9 @@ jobs:
           CHECK_REH: "no"
           DISABLE_APPIMAGE: ${{ vars.DISABLE_STABLE_APPIMAGE }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: ./check_tags.sh
+        run: |
+          chmod +x ./check_tags.sh
+          ./check_tags.sh
         if: env.DISABLED != 'yes' && env.SHOULD_BUILD == 'yes'
 
       - name: Install libkrb5-dev
@@ -246,21 +252,27 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           npm_config_arch: ${{ matrix.npm_arch }}
-        run: ./build/linux/package_bin.sh
+        run: |
+          chmod +x ./build/linux/package_bin.sh
+          ./build/linux/package_bin.sh
         if: env.DISABLED != 'yes' && env.SHOULD_BUILD == 'yes'
 
       - name: Prepare assets
         env:
           SHOULD_BUILD_REH: "no"
           SHOULD_BUILD_REH_WEB: "no"
-        run: ./prepare_assets.sh
+        run: |
+          chmod +x ./prepare_assets.sh
+          ./prepare_assets.sh
         if: env.DISABLED != 'yes' && env.SHOULD_BUILD == 'yes' && (env.SHOULD_DEPLOY == 'yes' || github.event.inputs.generate_assets == 'true')
 
       - name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.STRONGER_GITHUB_TOKEN }}
           GITHUB_USERNAME: ${{ github.repository_owner }}
-        run: ./release.sh
+        run: |
+          chmod +x ./release.sh
+          ./release.sh
         if: env.DISABLED != 'yes' && env.SHOULD_BUILD == 'yes' && env.SHOULD_DEPLOY == 'yes'
 
       - name: Update versions repo
@@ -268,7 +280,9 @@ jobs:
           FORCE_UPDATE: ${{ github.event.inputs.force_version }}
           GITHUB_TOKEN: ${{ secrets.STRONGER_GITHUB_TOKEN }}
           GITHUB_USERNAME: ${{ github.repository_owner }}
-        run: ./update_version.sh
+        run: |
+          chmod +x ./update_version.sh
+          ./update_version.sh
         if: env.DISABLED != 'yes' && env.SHOULD_BUILD == 'yes' && env.SHOULD_DEPLOY == 'yes'
 
       - name: Upload assets
@@ -355,14 +369,18 @@ jobs:
         if: env.DISABLED != 'yes'
 
       - name: Install GH
-        run: ./install_gh.sh
+        run: |
+          chmod +x ./install_gh.sh
+          ./install_gh.sh
         if: env.DISABLED != 'yes' && env.SHOULD_DEPLOY == 'yes'
 
       - name: Check existing VSCodium tags/releases
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           CHECK_ONLY_REH: "yes"
-        run: ./check_tags.sh
+        run: |
+          chmod +x ./check_tags.sh
+          ./check_tags.sh
         if: env.DISABLED != 'yes'
 
       - name: Download vscode artifact
@@ -375,14 +393,18 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           npm_config_arch: ${{ matrix.npm_arch }}
-        run: ./build/linux/package_reh.sh
+        run: |
+          chmod +x ./build/linux/package_reh.sh
+          ./build/linux/package_reh.sh
         if: env.DISABLED != 'yes' && (env.SHOULD_BUILD_REH != 'no' || env.SHOULD_BUILD_REH_WEB != 'no' || github.event.inputs.generate_assets == 'true')
 
       - name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.STRONGER_GITHUB_TOKEN }}
           GITHUB_USERNAME: ${{ github.repository_owner }}
-        run: ./release.sh
+        run: |
+          chmod +x ./release.sh
+          ./release.sh
         if: env.DISABLED != 'yes' && env.SHOULD_DEPLOY == 'yes' && (env.SHOULD_BUILD_REH != 'no' || env.SHOULD_BUILD_REH_WEB != 'no')
 
       - name: Upload assets
@@ -436,14 +458,18 @@ jobs:
           platform: x64
 
       - name: Install GH
-        run: ./install_gh.sh
+        run: |
+          chmod +x ./install_gh.sh
+          ./install_gh.sh
         if: env.SHOULD_DEPLOY == 'yes'
 
       - name: Check existing VSCodium tags/releases
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           CHECK_ONLY_REH: "yes"
-        run: ./check_tags.sh
+        run: |
+          chmod +x ./check_tags.sh
+          ./check_tags.sh
 
       - name: Install libkrb5-dev
         run: sudo apt-get update -y && sudo apt-get install -y libkrb5-dev
@@ -459,14 +485,18 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           npm_config_arch: ${{ matrix.npm_arch }}
-        run: ./build/alpine/package_reh.sh
+        run: |
+          chmod +x ./build/alpine/package_reh.sh
+          ./build/alpine/package_reh.sh
         if: env.DISABLED != 'yes' && (env.SHOULD_BUILD_REH != 'no' || env.SHOULD_BUILD_REH_WEB != 'no' || github.event.inputs.generate_assets == 'true')
 
       - name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.STRONGER_GITHUB_TOKEN }}
           GITHUB_USERNAME: ${{ github.repository_owner }}
-        run: ./release.sh
+        run: |
+          chmod +x ./release.sh
+          ./release.sh
         if: env.DISABLED != 'yes' && env.SHOULD_DEPLOY == 'yes' && (env.SHOULD_BUILD_REH != 'no' || env.SHOULD_BUILD_REH_WEB != 'no')
 
       - name: Upload assets

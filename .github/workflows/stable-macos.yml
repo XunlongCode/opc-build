@@ -93,6 +93,11 @@ jobs:
         run: . check_tags.sh
         if: env.SHOULD_DEPLOY == 'yes'
 
+      - name: Install dependencies & Build extensions
+        run: |
+          cd vscode
+          python ../start_build.py i
+
       - name: Build
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

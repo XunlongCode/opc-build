@@ -71,14 +71,14 @@ if [[ "${OS_NAME}" == "osx" ]]; then
     cd ..
   fi
 
-  if [[ "${SHOULD_BUILD_DMG}" != "no" ]]; then
-    echo "Building and moving DMG"
-    pushd "VSCode-darwin-${VSCODE_ARCH}"
-    CSC_IDENTITY_AUTO_DISCOVERY=false
-    npx create-dmg ./*.app . --identity="" --overwrite --no-sign
-    mv ./*.dmg "../assets/${APP_NAME}.${VSCODE_ARCH}.${RELEASE_VERSION}.dmg"
-    popd
-  fi
+  # if [[ "${SHOULD_BUILD_DMG}" != "no" ]]; then
+  #   echo "Building and moving DMG"
+  #   pushd "VSCode-darwin-${VSCODE_ARCH}"
+  #   CSC_IDENTITY_AUTO_DISCOVERY=false
+  #   npx create-dmg ./*.app . --identity="" --overwrite --no-sign
+  #   mv ./*.dmg "../assets/${APP_NAME}.${VSCODE_ARCH}.${RELEASE_VERSION}.dmg"
+  #   popd
+  # fi
 
   if [[ "${SHOULD_BUILD_SRC}" == "yes" ]]; then
     git archive --format tar.gz --output="./assets/${APP_NAME}-${RELEASE_VERSION}-src.tar.gz" HEAD
@@ -152,9 +152,9 @@ else
     SHOULD_BUILD_APPIMAGE="no"
   fi
 
-  if [[ "${SHOULD_BUILD_DEB}" != "no" || "${SHOULD_BUILD_APPIMAGE}" != "no" ]]; then
-    yarn gulp "vscode-linux-${VSCODE_ARCH}-build-deb"
-  fi
+  # if [[ "${SHOULD_BUILD_DEB}" != "no" || "${SHOULD_BUILD_APPIMAGE}" != "no" ]]; then
+  #   yarn gulp "vscode-linux-${VSCODE_ARCH}-build-deb"
+  # fi
 
   if [[ "${SHOULD_BUILD_RPM}" != "no" ]]; then
     yarn gulp "vscode-linux-${VSCODE_ARCH}-build-rpm"

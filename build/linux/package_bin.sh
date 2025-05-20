@@ -102,7 +102,8 @@ EOF
 fi
 
 for i in {1..5}; do # try 5 times
-  npm ci --prefix build && break
+  # npm ci --prefix build && break
+  npm i --prefix build && break
   if [[ $i == 3 ]]; then
     echo "Npm install failed too many times" >&2
     exit 1
@@ -119,7 +120,8 @@ if [[ -z "${VSCODE_SKIP_SETUPENV}" ]]; then
 fi
 
 for i in {1..5}; do # try 5 times
-  npm ci && break
+  # npm ci && break
+  npm i && break
   if [[ $i -eq 3 ]]; then
     echo "Npm install failed too many times" >&2
     exit 1

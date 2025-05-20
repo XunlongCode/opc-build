@@ -33,7 +33,8 @@ if [[ -d "../patches/alpine/reh/" ]]; then
 fi
 
 for i in {1..5}; do # try 5 times
-  npm ci && break
+  # npm ci && break
+  npm i && break
   if [[ $i == 3 ]]; then
     echo "Npm install failed too many times" >&2
     exit 1

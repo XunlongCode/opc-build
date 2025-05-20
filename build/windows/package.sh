@@ -12,7 +12,8 @@ tar -xzf ./vscode.tar.gz
 cd vscode || { echo "'vscode' dir not found"; exit 1; }
 
 for i in {1..5}; do # try 5 times
-  npm ci && break
+  # npm ci && break
+  npm i && break
   if [[ $i -eq 3 ]]; then
     echo "Npm install failed too many times" >&2
     exit 1

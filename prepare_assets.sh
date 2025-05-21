@@ -216,5 +216,6 @@ if [[ "${SHOULD_BUILD_REH_WEB}" != "no" ]]; then
 fi
 
 if [[ "${OS_NAME}" != "windows" ]]; then
+  chmod +x ./prepare_checksums.sh
   ./prepare_checksums.sh
 fi

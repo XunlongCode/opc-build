@@ -139,7 +139,7 @@ def main():
     deploy_source()
     move_files()
 
-    install_codicons()
+    # install_codicons() # 没用
 
     set_env()
 

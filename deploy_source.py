@@ -22,7 +22,7 @@ def clean_up():
         os.remove(f"./upstream/{QUALITY}.json")
 
 
-def uncompress_source(source_path=SOURCE_FILE, output_path=TEMP_PATH):
+def deploy_source(source_path=SOURCE_FILE, output_path=TEMP_PATH):
     output_path = os.path.join(output_path, "package")
     # Check if the source file exists
     if not os.path.exists(source_path):
@@ -65,7 +65,7 @@ def set_env():
 def main():
     clean_up()
 
-    uncompress_source()
+    deploy_source()
     move_files()
 
     set_env()

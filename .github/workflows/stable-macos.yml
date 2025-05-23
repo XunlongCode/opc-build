@@ -65,7 +65,7 @@ jobs:
 
       - name: Uncompress source
         run: |
-          python ./uncompress_source.py
+          python ./deploy_source.py
 
       - name: Set up env
         run: |

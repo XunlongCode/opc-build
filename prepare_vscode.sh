@@ -22,26 +22,6 @@ echo "GH_REPO_PATH=\"${GH_REPO_PATH}\""
 echo "VERSION_REPO_NAME=\"${VERSION_REPO_NAME}\""
 echo "ORG_NAME=\"${ORG_NAME}\""
 
-for file in ../patches/*.patch; do
-  if [[ -f "${file}" ]]; then
-    apply_patch "${file}"
-  fi
-done
-
-if [[ -d "../patches/${OS_NAME}/" ]]; then
-  for file in "../patches/${OS_NAME}/"*.patch; do
-    if [[ -f "${file}" ]]; then
-      apply_patch "${file}"
-    fi
-  done
-fi
-
-for file in ../patches/user/*.patch; do
-  if [[ -f "${file}" ]]; then
-    apply_patch "${file}"
-  fi
-done
-
 set -x
 
 export ELECTRON_SKIP_BINARY_DOWNLOAD=1

@@ -62,7 +62,6 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-        if: env.VSCODE_ARCH == 'x64'
 
       - name: Uncompress source
         run: |
@@ -87,13 +86,15 @@ jobs:
           echo SHOULD_BUILD=${SHOULD_BUILD} >> $GITHUB_ENV
           echo SHOULD_DEPLOY=${SHOULD_DEPLOY} >> $GITHUB_ENV
 
-          pip install setuptools
-
       - name: Check existing VSCodium tags/releases
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: . check_tags.sh
         if: env.SHOULD_DEPLOY == 'yes'
+
+      - name: Install setuptools
+        run: |
+          pip install setuptools
 
       - name: Install dependencies & Build extensions
         run: |

@@ -11,6 +11,31 @@ cd vscode || { echo "'vscode' dir not found"; exit 1; }
 chmod +x ../update_settings.sh
 ../update_settings.sh
 
+# apply patches
+{ set +x; } 2>/dev/null
+
+echo "APP_NAME=\"${APP_NAME}\""
+echo "APP_CODE=\"${APP_CODE}\""
+echo "APP_NAME_LC=\"${APP_NAME_LC}\""
+echo "BINARY_NAME=\"${BINARY_NAME}\""
+echo "GH_REPO_PATH=\"${GH_REPO_PATH}\""
+echo "VERSION_REPO_NAME=\"${VERSION_REPO_NAME}\""
+echo "ORG_NAME=\"${ORG_NAME}\""
+
+if [[ -d "../patches/${OS_NAME}/" ]]; then
+  for file in "../patches/${OS_NAME}/"*.patch; do
+    if [[ -f "${file}" ]]; then
+      apply_patch "${file}"
+    fi
+  done
+fi
+
+for file in ../patches/user/*.patch; do
+  if [[ -f "${file}" ]]; then
+    apply_patch "${file}"
+  fi
+done
+
 set -x
 
 export ELECTRON_SKIP_BINARY_DOWNLOAD=1

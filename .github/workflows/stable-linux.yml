@@ -51,7 +51,7 @@ jobs:
         with:
           ref: ${{ env.GITHUB_BRANCH }}
 
-      - name: Uncompress source
+      - name: Deploy source
         run: |
           python ./deploy_source.py
 
@@ -101,7 +101,7 @@ jobs:
           ref: ${{ env.GITHUB_BRANCH }}
         if: env.SHOULD_BUILD == 'yes'
 
-      - name: Uncompress source
+      - name: Deploy source
         run: |
           python ./deploy_source.py
 
@@ -222,7 +222,7 @@ jobs:
           ref: ${{ env.GITHUB_BRANCH }}
         if: env.DISABLED != 'yes' && env.SHOULD_BUILD == 'yes'
 
-      - name: Uncompress source
+      - name: Deploy source
         run: |
           python ./deploy_source.py
         if: env.DISABLED != 'yes'
@@ -345,7 +345,7 @@ jobs:
           ref: ${{ env.GITHUB_BRANCH }}
         if: env.DISABLED != 'yes'
 
-      - name: Uncompress source
+      - name: Deploy source
         run: |
           python ./deploy_source.py
         if: env.DISABLED != 'yes'
@@ -452,7 +452,7 @@ jobs:
         with:
           ref: ${{ env.GITHUB_BRANCH }}
 
-      - name: Uncompress source
+      - name: Deploy source
         run: |
           python ./deploy_source.py
 

@@ -51,7 +51,7 @@ jobs:
         with:
           ref: ${{ env.GITHUB_BRANCH }}
 
-      - name: Uncompress source
+      - name: Deploy source
         run: |
           python ./deploy_source.py
 
@@ -93,7 +93,7 @@ jobs:
           ref: ${{ env.GITHUB_BRANCH }}
         if: env.SHOULD_BUILD == 'yes'
 
-      - name: Uncompress source
+      - name: Deploy source
         run: |
           python ./deploy_source.py
 

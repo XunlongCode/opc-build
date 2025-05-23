@@ -63,7 +63,7 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: Uncompress source
+      - name: Deploy source
         run: |
           python ./deploy_source.py
 

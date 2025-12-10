@@ -49,7 +49,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
+          lfs: true
+          fetch-depth: 0
           ref: ${{ env.GITHUB_BRANCH }}
+
+      - name: Download LFS objects
+        run: git lfs pull
 
       - name: Deploy source
         run: |
@@ -98,13 +103,18 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
+          lfs: true
+          fetch-depth: 0
           ref: ${{ env.GITHUB_BRANCH }}
         if: env.SHOULD_BUILD == 'yes'
+
+      - name: Download LFS objects
+        run: git lfs pull
 
       - name: Deploy source
         run: |
           python ./deploy_source.py
-      
+
       - name: Dos2unix
         run: |
           sudo apt-get install -y dos2unix
@@ -199,7 +209,7 @@ jobs:
             vscode_arch: armhf
             npm_arch: arm
             image: vscodium/vscodium-linux-build-agent:focal-armhf
-          
+
     container:
       image: ${{ matrix.image }}
     env:
@@ -219,8 +229,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
+          lfs: true
+          fetch-depth: 0
           ref: ${{ env.GITHUB_BRANCH }}
         if: env.DISABLED != 'yes' && env.SHOULD_BUILD == 'yes'
+
+      - name: Download LFS objects
+        run: git lfs pull
 
       - name: Deploy source
         run: |
@@ -261,7 +276,7 @@ jobs:
           chmod +x ./build/linux/package_bin.sh
           ./build/linux/package_bin.sh
         if: env.DISABLED != 'yes' && env.SHOULD_BUILD == 'yes'
-      
+
       - name: Create code-tunnel
         run: |
           python ./create_code_tunnel.py
@@ -329,7 +344,7 @@ jobs:
           - slug: ARM32
             vscode_arch: armhf
             npm_arch: arm
-            
+
     env:
       BUILD_SOURCEVERSION: ${{ needs.compile.outputs.BUILD_SOURCEVERSION }}
       DISABLED: ${{ vars[format('DISABLE_STABLE_LINUX_REH_{0}', matrix.slug)] }}
@@ -344,8 +359,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
+          lfs: true
+          fetch-depth: 0
           ref: ${{ env.GITHUB_BRANCH }}
         if: env.DISABLED != 'yes'
+
+      - name: Download LFS objects
+        run: git lfs pull
 
       - name: Deploy source
         run: |
@@ -452,7 +472,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
+          lfs: true
+          fetch-depth: 0
           ref: ${{ env.GITHUB_BRANCH }}
+
+      - name: Download LFS objects
+        run: git lfs pull
 
       - name: Deploy source
         run: |

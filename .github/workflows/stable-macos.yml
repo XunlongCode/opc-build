@@ -51,7 +51,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
+          lfs: true
+          fetch-depth: 0
           ref: ${{ env.GITHUB_BRANCH }}
+
+      - name: Download LFS objects
+        run: git lfs pull
 
       - name: Setup Node.js environment
         uses: actions/setup-node@v4
